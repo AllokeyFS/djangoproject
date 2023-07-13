@@ -64,9 +64,16 @@ class Movie(models.Model):
 
 
 class Users(models.Model):
+
+    ROLE_CHOICES = (
+        ('user', 'Пользователь'),
+        ('admin', 'Админ'),
+        ('guest', 'Гость'),
+    )
+    role=models.CharField(max_length=30,default='guest', choices=ROLE_CHOICES, verbose_name='Роль')
     first_name = models.CharField(max_length=50, verbose_name='Имя')
     login = models.CharField(max_length=50, verbose_name='Логин')
-    email = models.EmailField(verbose_name='Почта')
+    email = models.EmailField(unique=True, verbose_name='Почта')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата регистрации')
 
 

@@ -41,7 +41,10 @@ class MovieAdmin(admin.ModelAdmin):
 
 # @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'login', 'email', 'date', )
+    list_display = ('id','role', 'first_name', 'login', 'email', 'date', )
+    list_editable = ('role', )
+    list_filter = ('role', )
+    search_fields = ('email', )
 
 
 # admin.site.register(Author, AuthorAdmin)
