@@ -1,5 +1,6 @@
 venv/
 images/
 shop/__pycache__
-shop/migrations/__pycache__
 /db.sqlite3
+shop/migrations/*
+!shop/migrations/__init__.py

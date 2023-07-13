@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Author, Book, CategoryMovie, Movie, Users
+from django.utils.safestring import mark_safe
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
@@ -23,12 +24,20 @@ class CategoryMovieAdmin(admin.ModelAdmin):
     search_fields = ('name', )
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('id','image', 'name', 'category', 'year_release', 'company', 'length', 'budget', 'description', )
+    list_display = ('id','icon_show', 'name', 'category', 'year_release', 'company', 'length', 'budget', 'description', )
     list_filter = ('category', 'company',)
-    readonly_fields = ('image',)
+    readonly_fields = ('icon_show',)
     search_fields = ('name', )
     list_display_links = ('id', 'name', )
     autocomplete_fields = ('category', )
+
+    def icon_show(self, obj):
+        if obj.image:
+            return mark_safe(f'<a href="{obj.image.url}" target="_blank"><img src="{obj.image.url}" width="50" height="60"></a>')
+        else:
+            return '-'
+        
+    icon_show.short_description = 'Изображение'
 
 # @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
