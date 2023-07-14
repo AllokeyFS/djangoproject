@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Author, Book, CategoryMovie, Movie
+from .models import Author, Book, CategoryMovie, Movie, Users
 
 def author_list(request):
     authors = Author.objects.all()
@@ -16,3 +16,7 @@ def category_list(request):
 def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'html/movie.html', {'movies': movies})
+
+def user_list(request):
+    users = Users.objects.all()
+    return render(request, 'html/user.html', {'users': users})
