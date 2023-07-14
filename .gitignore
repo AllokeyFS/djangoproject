@@ -5,3 +5,4 @@ shop/__pycache__
 shop/migrations/*
 !shop/migrations/__init__.py
 shop/templates/*
+main/__pycache__
