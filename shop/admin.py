@@ -24,12 +24,16 @@ class CategoryMovieAdmin(admin.ModelAdmin):
     search_fields = ('name', )
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('id','icon_show', 'name', 'category', 'year_release', 'company', 'length', 'budget', 'description', )
+    list_display = ('id','icon_show', 'name','category_names', 'year_release', 'company', 'length', 'budget', 'description', )
     list_filter = ('category', 'company',)
     readonly_fields = ('icon_show',)
     search_fields = ('name', )
     list_display_links = ('id', 'name', )
     autocomplete_fields = ('category', )
+    # filter_horizontal = ('category', )
+    def category_names(self,obj):
+        return ', '.join([a.name for a in obj.category.all()])
+    category_names.short_description = 'Категория фильмов'
 
     def icon_show(self, obj):
         if obj.image:

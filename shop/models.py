@@ -46,7 +46,7 @@ class CategoryMovie(models.Model):
 class Movie(models.Model):
     image = models.ImageField(upload_to='images/', verbose_name='Фото')
     name = models.CharField(max_length=40, verbose_name='Название фильма')
-    category = models.ForeignKey(CategoryMovie, on_delete=models.CASCADE, verbose_name='Категория')
+    category = models.ManyToManyField(CategoryMovie, verbose_name='Категория')
     year_release = models.DateField(verbose_name='Дата релиза')
     company = models.CharField(max_length=30, verbose_name='Компания')
     length = models.IntegerField(verbose_name='Длительность')
@@ -54,6 +54,9 @@ class Movie(models.Model):
     description = models.TextField(verbose_name='Описание')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
 
+    # def category_names(self):
+        # return ', '.join([a.name for a in self.category.all()])
+    # category_names.short_description = 'Категория фильмов'
 
     def __str__(self) -> str:
         return self.name
@@ -83,3 +86,7 @@ class Users(models.Model):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+
+# class Colors(models.Model):
+#     actor = 
